@@ -1,0 +1,721 @@
+Enter password: ****
+Welcome to the MySQL monitor.  Commands end with ; or \g.
+Your MySQL connection id is 120
+Server version: 8.0.34 MySQL Community Server - GPL
+
+Copyright (c) 2000, 2023, Oracle and/or its affiliates.
+
+Oracle is a registered trademark of Oracle Corporation and/or its
+affiliates. Other names may be trademarks of their respective
+owners.
+
+Type 'help;' or '\h' for help. Type '\c' to clear the current input statement.
+
+mysql> show databases;
++--------------------+
+| Database           |
++--------------------+
+| college            |
+| cse                |
+| customer           |
+| db10               |
+| db6                |
+| emp                |
+| first              |
+| information_schema |
+| jdbc               |
+| mysql              |
+| navu               |
+| performance_schema |
+| poe                |
+| rd                 |
+| rutika             |
+| rutiks             |
+| rutu               |
+| sample             |
+| sample1            |
+| shri               |
+| simple             |
+| sinhgad            |
+| skn                |
+| student            |
+| student1           |
+| sys                |
+| trigger1           |
+| user               |
++--------------------+
+28 rows in set (0.04 sec)
+
+mysql> create database pratice;
+Query OK, 1 row affected (0.02 sec)
+
+mysql> use pratice;
+Database changed
+mysql> show tables;
+Empty set (0.01 sec)
+
+mysql> create table student;
+ERROR 4028 (HY000): A table must have at least one visible column.
+mysql> create table student (id int,name varchar(20),marks int,department varchar(20));
+Query OK, 0 rows affected (0.03 sec)
+
+mysql> desc student;
++------------+-------------+------+-----+---------+-------+
+| Field      | Type        | Null | Key | Default | Extra |
++------------+-------------+------+-----+---------+-------+
+| id         | int         | YES  |     | NULL    |       |
+| name       | varchar(20) | YES  |     | NULL    |       |
+| marks      | int         | YES  |     | NULL    |       |
+| department | varchar(20) | YES  |     | NULL    |       |
++------------+-------------+------+-----+---------+-------+
+4 rows in set (0.01 sec)
+
+mysql> insert into student values(1,"rutika",99,"cse"),(2,"ritesh",88,"cse"),(3,"navishatu",97,"entc"),(4,"monika",55,"civil"),(5,"soni",45,"mech");
+Query OK, 5 rows affected (0.01 sec)
+Records: 5  Duplicates: 0  Warnings: 0
+
+mysql> select * from student;
++------+-----------+-------+------------+
+| id   | name      | marks | department |
++------+-----------+-------+------------+
+|    1 | rutika    |    99 | cse        |
+|    2 | ritesh    |    88 | cse        |
+|    3 | navishatu |    97 | entc       |
+|    4 | monika    |    55 | civil      |
+|    5 | soni      |    45 | mech       |
++------+-----------+-------+------------+
+5 rows in set (0.00 sec)
+
+mysql> alter table student add column class (int);
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '(int)' at line 1
+mysql> alter table student add column class int;
+Query OK, 0 rows affected (0.01 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql> select * from student;
++------+-----------+-------+------------+-------+
+| id   | name      | marks | department | class |
++------+-----------+-------+------------+-------+
+|    1 | rutika    |    99 | cse        |  NULL |
+|    2 | ritesh    |    88 | cse        |  NULL |
+|    3 | navishatu |    97 | entc       |  NULL |
+|    4 | monika    |    55 | civil      |  NULL |
+|    5 | soni      |    45 | mech       |  NULL |
++------+-----------+-------+------------+-------+
+5 rows in set (0.00 sec)
+
+mysql> alter table student rename id to roll_no;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'to roll_no' at line 1
+mysql> alter table student rename  column id to roll_no;
+Query OK, 0 rows affected (0.01 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql> select * from student;
++---------+-----------+-------+------------+-------+
+| roll_no | name      | marks | department | class |
++---------+-----------+-------+------------+-------+
+|       1 | rutika    |    99 | cse        |  NULL |
+|       2 | ritesh    |    88 | cse        |  NULL |
+|       3 | navishatu |    97 | entc       |  NULL |
+|       4 | monika    |    55 | civil      |  NULL |
+|       5 | soni      |    45 | mech       |  NULL |
++---------+-----------+-------+------------+-------+
+5 rows in set (0.00 sec)
+
+mysql> alter table student drop column class;
+Query OK, 0 rows affected (0.01 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql> select * from student;
++---------+-----------+-------+------------+
+| roll_no | name      | marks | department |
++---------+-----------+-------+------------+
+|       1 | rutika    |    99 | cse        |
+|       2 | ritesh    |    88 | cse        |
+|       3 | navishatu |    97 | entc       |
+|       4 | monika    |    55 | civil      |
+|       5 | soni      |    45 | mech       |
++---------+-----------+-------+------------+
+5 rows in set (0.00 sec)
+
+mysql> select name,roll-no,marks from student;
+ERROR 1054 (42S22): Unknown column 'roll' in 'field list'
+mysql> select name,roll_no,marks from student;
++-----------+---------+-------+
+| name      | roll_no | marks |
++-----------+---------+-------+
+| rutika    |       1 |    99 |
+| ritesh    |       2 |    88 |
+| navishatu |       3 |    97 |
+| monika    |       4 |    55 |
+| soni      |       5 |    45 |
++-----------+---------+-------+
+5 rows in set (0.00 sec)
+
+mysql> select roll_no from student where marks>55;
++---------+
+| roll_no |
++---------+
+|       1 |
+|       2 |
+|       3 |
++---------+
+3 rows in set (0.00 sec)
+
+mysql> select marks,name,roll
+    -> ^C
+mysql> select marks,roll_no , name from student where marks<55;
++-------+---------+------+
+| marks | roll_no | name |
++-------+---------+------+
+|    45 |       5 | soni |
++-------+---------+------+
+1 row in set (0.00 sec)
+
+mysql> insert into student values(6,"mahi",87,"IT");
+Query OK, 1 row affected (0.00 sec)
+
+mysql> select * from student;
++---------+-----------+-------+------------+
+| roll_no | name      | marks | department |
++---------+-----------+-------+------------+
+|       1 | rutika    |    99 | cse        |
+|       2 | ritesh    |    88 | cse        |
+|       3 | navishatu |    97 | entc       |
+|       4 | monika    |    55 | civil      |
+|       5 | soni      |    45 | mech       |
+|       6 | mahi      |    87 | IT         |
++---------+-----------+-------+------------+
+6 rows in set (0.00 sec)
+
+mysql> insert into student values(6,"mahi",87);
+ERROR 1136 (21S01): Column count doesn't match value count at row 1
+mysql> insert into student values(7,"mahi",87);
+ERROR 1136 (21S01): Column count doesn't match value count at row 1
+mysql> insert into student values(7,"mahi",87,"null");
+Query OK, 1 row affected (0.00 sec)
+
+mysql> select * from student;
++---------+-----------+-------+------------+
+| roll_no | name      | marks | department |
++---------+-----------+-------+------------+
+|       1 | rutika    |    99 | cse        |
+|       2 | ritesh    |    88 | cse        |
+|       3 | navishatu |    97 | entc       |
+|       4 | monika    |    55 | civil      |
+|       5 | soni      |    45 | mech       |
+|       6 | mahi      |    87 | IT         |
+|       7 | mahi      |    87 | null       |
++---------+-----------+-------+------------+
+7 rows in set (0.00 sec)
+
+mysql> update student set "IT" where roll_no=7;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '"IT" where roll_no=7' at line 1
+mysql> update student set department="IT" where roll_no=7;
+Query OK, 1 row affected (0.00 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+mysql> select * from student;
++---------+-----------+-------+------------+
+| roll_no | name      | marks | department |
++---------+-----------+-------+------------+
+|       1 | rutika    |    99 | cse        |
+|       2 | ritesh    |    88 | cse        |
+|       3 | navishatu |    97 | entc       |
+|       4 | monika    |    55 | civil      |
+|       5 | soni      |    45 | mech       |
+|       6 | mahi      |    87 | IT         |
+|       7 | mahi      |    87 | IT         |
++---------+-----------+-------+------------+
+7 rows in set (0.00 sec)
+
+mysql> alter table student add column year int, salary int;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'salary int' at line 1
+mysql> alter table student add column year int;
+Query OK, 0 rows affected (0.01 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql> select * from student;
++---------+-----------+-------+------------+------+
+| roll_no | name      | marks | department | year |
++---------+-----------+-------+------------+------+
+|       1 | rutika    |    99 | cse        | NULL |
+|       2 | ritesh    |    88 | cse        | NULL |
+|       3 | navishatu |    97 | entc       | NULL |
+|       4 | monika    |    55 | civil      | NULL |
+|       5 | soni      |    45 | mech       | NULL |
+|       6 | mahi      |    87 | IT         | NULL |
+|       7 | mahi      |    87 | IT         | NULL |
++---------+-----------+-------+------------+------+
+7 rows in set (0.00 sec)
+
+mysql> update student set column year=2022 where marks>55;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'column year=2022 where marks>55' at line 1
+mysql> update student set  year=2022 where marks>55;
+Query OK, 5 rows affected (0.00 sec)
+Rows matched: 5  Changed: 5  Warnings: 0
+
+mysql> select * from student;
++---------+-----------+-------+------------+------+
+| roll_no | name      | marks | department | year |
++---------+-----------+-------+------------+------+
+|       1 | rutika    |    99 | cse        | 2022 |
+|       2 | ritesh    |    88 | cse        | 2022 |
+|       3 | navishatu |    97 | entc       | 2022 |
+|       4 | monika    |    55 | civil      | NULL |
+|       5 | soni      |    45 | mech       | NULL |
+|       6 | mahi      |    87 | IT         | 2022 |
+|       7 | mahi      |    87 | IT         | 2022 |
++---------+-----------+-------+------------+------+
+7 rows in set (0.00 sec)
+
+mysql> update student set name="rutika" where marks<90;
+Query OK, 5 rows affected (0.00 sec)
+Rows matched: 5  Changed: 5  Warnings: 0
+
+mysql> select * from student;
++---------+-----------+-------+------------+------+
+| roll_no | name      | marks | department | year |
++---------+-----------+-------+------------+------+
+|       1 | rutika    |    99 | cse        | 2022 |
+|       2 | rutika    |    88 | cse        | 2022 |
+|       3 | navishatu |    97 | entc       | 2022 |
+|       4 | rutika    |    55 | civil      | NULL |
+|       5 | rutika    |    45 | mech       | NULL |
+|       6 | rutika    |    87 | IT         | 2022 |
+|       7 | rutika    |    87 | IT         | 2022 |
++---------+-----------+-------+------------+------+
+7 rows in set (0.00 sec)
+
+mysql> select * from student where marks<55;
++---------+--------+-------+------------+------+
+| roll_no | name   | marks | department | year |
++---------+--------+-------+------------+------+
+|       5 | rutika |    45 | mech       | NULL |
++---------+--------+-------+------------+------+
+1 row in set (0.00 sec)
+
+mysql> alter table student delete where roll_no=6;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'delete where roll_no=6' at line 1
+mysql> delete from student where marks>95;
+Query OK, 2 rows affected (0.00 sec)
+
+mysql> select * from student;
++---------+--------+-------+------------+------+
+| roll_no | name   | marks | department | year |
++---------+--------+-------+------------+------+
+|       2 | rutika |    88 | cse        | 2022 |
+|       4 | rutika |    55 | civil      | NULL |
+|       5 | rutika |    45 | mech       | NULL |
+|       6 | rutika |    87 | IT         | 2022 |
+|       7 | rutika |    87 | IT         | 2022 |
++---------+--------+-------+------------+------+
+5 rows in set (0.00 sec)
+
+mysql> alter table student drop;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '' at line 1
+mysql> alter table student drop where marks>85;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'where marks>85' at line 1
+mysql> drop student;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'student' at line 1
+mysql> drop table student;
+Query OK, 0 rows affected (0.01 sec)
+
+mysql> select * from student;
+ERROR 1146 (42S02): Table 'pratice.student' doesn't exist
+mysql> truncate table student;
+ERROR 1146 (42S02): Table 'pratice.student' doesn't exist
+mysql> create table student (id int,name varchar(20));
+Query OK, 0 rows affected (0.01 sec)
+
+mysql> select * from student;
+Empty set (0.00 sec)
+
+mysql> desc student;
++-------+-------------+------+-----+---------+-------+
+| Field | Type        | Null | Key | Default | Extra |
++-------+-------------+------+-----+---------+-------+
+| id    | int         | YES  |     | NULL    |       |
+| name  | varchar(20) | YES  |     | NULL    |       |
++-------+-------------+------+-----+---------+-------+
+2 rows in set (0.00 sec)
+
+mysql> insert into student values(1,"rutika"),(2,"ritesh"),(3,"navishthu");
+Query OK, 3 rows affected (0.00 sec)
+Records: 3  Duplicates: 0  Warnings: 0
+
+mysql> select * from student;
++------+-----------+
+| id   | name      |
++------+-----------+
+|    1 | rutika    |
+|    2 | ritesh    |
+|    3 | navishthu |
++------+-----------+
+3 rows in set (0.00 sec)
+
+mysql> create table info (id int,marks int,dept varchar(20));
+Query OK, 0 rows affected (0.01 sec)
+
+mysql> insert into info values(1,55,"cse"),(2,65,"entc"),(3,90,"civil");
+Query OK, 3 rows affected (0.00 sec)
+Records: 3  Duplicates: 0  Warnings: 0
+
+mysql> select * from student left join on info student.id=info.id;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'on info student.id=info.id' at line 1
+mysql> select * from student left join  info on student.id=info.id;
++------+-----------+------+-------+-------+
+| id   | name      | id   | marks | dept  |
++------+-----------+------+-------+-------+
+|    1 | rutika    |    1 |    55 | cse   |
+|    2 | ritesh    |    2 |    65 | entc  |
+|    3 | navishthu |    3 |    90 | civil |
++------+-----------+------+-------+-------+
+3 rows in set (0.00 sec)
+
+mysql> insert into info values(4,77,"mech"),(5,66,"IT");
+Query OK, 2 rows affected (0.00 sec)
+Records: 2  Duplicates: 0  Warnings: 0
+
+mysql> insert into student values(11,"mahi"),(12,"abhi"),(13,"vivan");
+Query OK, 3 rows affected (0.01 sec)
+Records: 3  Duplicates: 0  Warnings: 0
+
+mysql> select * from student left join  info on student.id=info.id;
++------+-----------+------+-------+-------+
+| id   | name      | id   | marks | dept  |
++------+-----------+------+-------+-------+
+|    1 | rutika    |    1 |    55 | cse   |
+|    2 | ritesh    |    2 |    65 | entc  |
+|    3 | navishthu |    3 |    90 | civil |
+|   11 | mahi      | NULL |  NULL | NULL  |
+|   12 | abhi      | NULL |  NULL | NULL  |
+|   13 | vivan     | NULL |  NULL | NULL  |
++------+-----------+------+-------+-------+
+6 rows in set (0.00 sec)
+
+mysql> select * from student right join  info on student.id=info.id;
++------+-----------+------+-------+-------+
+| id   | name      | id   | marks | dept  |
++------+-----------+------+-------+-------+
+|    1 | rutika    |    1 |    55 | cse   |
+|    2 | ritesh    |    2 |    65 | entc  |
+|    3 | navishthu |    3 |    90 | civil |
+| NULL | NULL      |    4 |    77 | mech  |
+| NULL | NULL      |    5 |    66 | IT    |
++------+-----------+------+-------+-------+
+5 rows in set (0.00 sec)
+
+mysql> select * from student inner join  info on student.id=info.id;
++------+-----------+------+-------+-------+
+| id   | name      | id   | marks | dept  |
++------+-----------+------+-------+-------+
+|    1 | rutika    |    1 |    55 | cse   |
+|    2 | ritesh    |    2 |    65 | entc  |
+|    3 | navishthu |    3 |    90 | civil |
++------+-----------+------+-------+-------+
+3 rows in set (0.00 sec)
+
+mysql> select * from student natural join  info on student.id=info.id;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'on student.id=info.id' at line 1
+mysql> select * from student full outer join  info on student.id=info.id;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'outer join  info on student.id=info.id' at line 1
+mysql> select * from student full  join  info on student.id=info.id;
+ERROR 1054 (42S22): Unknown column 'student.id' in 'on clause'
+mysql> select name,marks from student full join info on student.id=info.id;
+ERROR 1054 (42S22): Unknown column 'student.id' in 'on clause'
+mysql> select name,marks from student FULL OUTER JOIN info on student.id=info.id;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'OUTER JOIN info on student.id=info.id' at line 1
+mysql> select name,id from student FULL OUTER JOIN info on student.id=info.id where marks>50;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'OUTER JOIN info on student.id=info.id where marks>50' at line 1
+mysql> select name,id from student RIGHT OUTER JOIN info on student.id=info.id where marks>50;
+ERROR 1052 (23000): Column 'id' in field list is ambiguous
+mysql> select * from student inner join  info on student.id=info.id;
++------+-----------+------+-------+-------+
+| id   | name      | id   | marks | dept  |
++------+-----------+------+-------+-------+
+|    1 | rutika    |    1 |    55 | cse   |
+|    2 | ritesh    |    2 |    65 | entc  |
+|    3 | navishthu |    3 |    90 | civil |
++------+-----------+------+-------+-------+
+3 rows in set (0.00 sec)
+
+mysql> select * from student full outer join info on info.id=student.id;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'outer join info on info.id=student.id' at line 1
+mysql> select * from student natural join  info;
++------+-----------+-------+-------+
+| id   | name      | marks | dept  |
++------+-----------+-------+-------+
+|    1 | rutika    |    55 | cse   |
+|    2 | ritesh    |    65 | entc  |
+|    3 | navishthu |    90 | civil |
++------+-----------+-------+-------+
+3 rows in set (0.00 sec)
+
+mysql> select * from student left outer join info on info.id=student.id;
++------+-----------+------+-------+-------+
+| id   | name      | id   | marks | dept  |
++------+-----------+------+-------+-------+
+|    1 | rutika    |    1 |    55 | cse   |
+|    2 | ritesh    |    2 |    65 | entc  |
+|    3 | navishthu |    3 |    90 | civil |
+|   11 | mahi      | NULL |  NULL | NULL  |
+|   12 | abhi      | NULL |  NULL | NULL  |
+|   13 | vivan     | NULL |  NULL | NULL  |
++------+-----------+------+-------+-------+
+6 rows in set (0.00 sec)
+
+mysql> select * from student right outer join info on info.id=student.id;
++------+-----------+------+-------+-------+
+| id   | name      | id   | marks | dept  |
++------+-----------+------+-------+-------+
+|    1 | rutika    |    1 |    55 | cse   |
+|    2 | ritesh    |    2 |    65 | entc  |
+|    3 | navishthu |    3 |    90 | civil |
+| NULL | NULL      |    4 |    77 | mech  |
+| NULL | NULL      |    5 |    66 | IT    |
++------+-----------+------+-------+-------+
+5 rows in set (0.00 sec)
+
+mysql> select * from student right inner join info on info.id=student.id;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'inner join info on info.id=student.id' at line 1
+mysql> select * from student full inner join info on info.id=student.id;
+ERROR 1054 (42S22): Unknown column 'student.id' in 'on clause'
+mysql> select * from student full outer join info on info.id=student.id;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'outer join info on info.id=student.id' at line 1
+mysql> (select * from student left outer join info on info.id=student.id)union all(select * from student right outer join info on student.id=inho.id);
+ERROR 1054 (42S22): Unknown column 'inho.id' in 'on clause'
+mysql> (select * from student left outer join info on info.id=student.id)union all(select * from student right outer join info on student.id=info.id);
++------+-----------+------+-------+-------+
+| id   | name      | id   | marks | dept  |
++------+-----------+------+-------+-------+
+|    1 | rutika    |    1 |    55 | cse   |
+|    2 | ritesh    |    2 |    65 | entc  |
+|    3 | navishthu |    3 |    90 | civil |
+|   11 | mahi      | NULL |  NULL | NULL  |
+|   12 | abhi      | NULL |  NULL | NULL  |
+|   13 | vivan     | NULL |  NULL | NULL  |
+|    1 | rutika    |    1 |    55 | cse   |
+|    2 | ritesh    |    2 |    65 | entc  |
+|    3 | navishthu |    3 |    90 | civil |
+| NULL | NULL      |    4 |    77 | mech  |
+| NULL | NULL      |    5 |    66 | IT    |
++------+-----------+------+-------+-------+
+11 rows in set (0.00 sec)
+
+mysql> create table empolyee (id int,name varchar(20),department varchar(20),salary int,experience int,address varchar(20));
+Query OK, 0 rows affected (0.01 sec)
+
+mysql> insert into employee values(1,"rutika","cse",50000,5,"omerga");
+ERROR 1146 (42S02): Table 'pratice.employee' doesn't exist
+mysql> insert into empolyee values(1,"rutika","cse",50000,5,"omerga");
+Query OK, 1 row affected (0.00 sec)
+
+mysql> insert into empolyee values(2,"ritesh","cse",12000,1,"turori"),(3,"monika","entc",15000,8,"solapur"),(4,"soni","entc",86000,9,"mumbai"),(5,"navu","civil",20000,4,"pandharpur"),(6,"aishu","civil",70000,4,"goa"),(7,"sakshi","mech",16000,2,"aurangabad"),(8,"avi","mech",96000,12,"akluj"),(9,"sneha","electrical",14000,1,"bhalewadi");
+Query OK, 8 rows affected (0.00 sec)
+Records: 8  Duplicates: 0  Warnings: 0
+
+mysql> select * from employee;
+ERROR 1146 (42S02): Table 'pratice.employee' doesn't exist
+mysql> select * from empolyee;
++------+--------+------------+--------+------------+------------+
+| id   | name   | department | salary | experience | address    |
++------+--------+------------+--------+------------+------------+
+|    1 | rutika | cse        |  50000 |          5 | omerga     |
+|    2 | ritesh | cse        |  12000 |          1 | turori     |
+|    3 | monika | entc       |  15000 |          8 | solapur    |
+|    4 | soni   | entc       |  86000 |          9 | mumbai     |
+|    5 | navu   | civil      |  20000 |          4 | pandharpur |
+|    6 | aishu  | civil      |  70000 |          4 | goa        |
+|    7 | sakshi | mech       |  16000 |          2 | aurangabad |
+|    8 | avi    | mech       |  96000 |         12 | akluj      |
+|    9 | sneha  | electrical |  14000 |          1 | bhalewadi  |
++------+--------+------------+--------+------------+------------+
+9 rows in set (0.00 sec)
+
+mysql> select count(name) from empolyee;
++-------------+
+| count(name) |
++-------------+
+|           9 |
++-------------+
+1 row in set (0.00 sec)
+
+mysql> select count(id) from empolyee;
++-----------+
+| count(id) |
++-----------+
+|         9 |
++-----------+
+1 row in set (0.00 sec)
+
+mysql> select count(id) from empolyee;
++-----------+
+| count(id) |
++-----------+
+|         9 |
++-----------+
+1 row in set (0.00 sec)
+
+mysql>
+mysql> select count(department) from empolyee;
++-------------------+
+| count(department) |
++-------------------+
+|                 9 |
++-------------------+
+1 row in set (0.00 sec)
+
+mysql> select min(salary) from employee;
+ERROR 1146 (42S02): Table 'pratice.employee' doesn't exist
+mysql> select min(salary) from empolyee;
++-------------+
+| min(salary) |
++-------------+
+|       12000 |
++-------------+
+1 row in set (0.01 sec)
+
+mysql> select max(salary) from empolyee;
++-------------+
+| max(salary) |
++-------------+
+|       96000 |
++-------------+
+1 row in set (0.00 sec)
+
+mysql> select avg(salary) from empolyee;
++-------------+
+| avg(salary) |
++-------------+
+|  42111.1111 |
++-------------+
+1 row in set (0.01 sec)
+
+mysql> select count(name) from empolyee where salary<50000;
++-------------+
+| count(name) |
++-------------+
+|           5 |
++-------------+
+1 row in set (0.00 sec)
+
+mysql> select count(name) from empolyee where salary>50000;
++-------------+
+| count(name) |
++-------------+
+|           3 |
++-------------+
+1 row in set (0.00 sec)
+
+mysql> select name,salary from employee where salary<50000 group by(department);
+ERROR 1146 (42S02): Table 'pratice.employee' doesn't exist
+mysql> select name,salary from empolyee where salary<50000 group by(department);
+ERROR 1055 (42000): Expression #1 of SELECT list is not in GROUP BY clause and contains nonaggregated column 'pratice.empolyee.name' which is not functionally dependent on columns in GROUP BY clause; this is incompatible with sql_mode=only_full_group_by
+mysql> select max(salary) from empolyee where department="cse";
++-------------+
+| max(salary) |
++-------------+
+|       50000 |
++-------------+
+1 row in set (0.00 sec)
+
+mysql> select department,name,count(*) from empolyee group by department;
+ERROR 1055 (42000): Expression #2 of SELECT list is not in GROUP BY clause and contains nonaggregated column 'pratice.empolyee.name' which is not functionally dependent on columns in GROUP BY clause; this is incompatible with sql_mode=only_full_group_by
+mysql> select department,count(*) from empolyee group by department;
++------------+----------+
+| department | count(*) |
++------------+----------+
+| cse        |        2 |
+| entc       |        2 |
+| civil      |        2 |
+| mech       |        2 |
+| electrical |        1 |
++------------+----------+
+5 rows in set (0.00 sec)
+
+mysql> select name,count(*) from empolyee group by department;
+ERROR 1055 (42000): Expression #1 of SELECT list is not in GROUP BY clause and contains nonaggregated column 'pratice.empolyee.name' which is not functionally dependent on columns in GROUP BY clause; this is incompatible with sql_mode=only_full_group_by
+mysql> select department,name,count(*) from empolyee group by department && group by name;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'group by name' at line 1
+mysql> select salary,sum(salary) as total_sum from empolyee group by department;
+ERROR 1055 (42000): Expression #1 of SELECT list is not in GROUP BY clause and contains nonaggregated column 'pratice.empolyee.salary' which is not functionally dependent on columns in GROUP BY clause; this is incompatible with sql_mode=only_full_group_by
+mysql> select department,sum(salary) as total_sum from empolyee group by department;
++------------+-----------+
+| department | total_sum |
++------------+-----------+
+| cse        |     62000 |
+| entc       |    101000 |
+| civil      |     90000 |
+| mech       |    112000 |
+| electrical |     14000 |
++------------+-----------+
+5 rows in set (0.00 sec)
+
+mysql> select department,count(*) from empolyee group by department;
++------------+----------+
+| department | count(*) |
++------------+----------+
+| cse        |        2 |
+| entc       |        2 |
+| civil      |        2 |
+| mech       |        2 |
+| electrical |        1 |
++------------+----------+
+5 rows in set (0.00 sec)
+
+mysql> select department,sum(salary)as total_salary from empolyee group by department;
++------------+--------------+
+| department | total_salary |
++------------+--------------+
+| cse        |        62000 |
+| entc       |       101000 |
+| civil      |        90000 |
+| mech       |       112000 |
+| electrical |        14000 |
++------------+--------------+
+5 rows in set (0.00 sec)
+
+mysql> select department,name,salary from empolyee group by department;
+ERROR 1055 (42000): Expression #2 of SELECT list is not in GROUP BY clause and contains nonaggregated column 'pratice.empolyee.name' which is not functionally dependent on columns in GROUP BY clause; this is incompatible with sql_mode=only_full_group_by
+mysql> select department, max(salary) from department group by department;
+ERROR 1146 (42S02): Table 'pratice.department' doesn't exist
+mysql> select department, max(salary) from empolyee group by department;
++------------+-------------+
+| department | max(salary) |
++------------+-------------+
+| cse        |       50000 |
+| entc       |       86000 |
+| civil      |       70000 |
+| mech       |       96000 |
+| electrical |       14000 |
++------------+-------------+
+5 rows in set (0.00 sec)
+
+mysql> select department, max(salary) as(select name from empolyee) from empolyee group by department;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '(select name from empolyee) from empolyee group by department' at line 1
+mysql> select department,name,salary from empolyee where(department,salary)in(select department,max(salary) from empolyee group by department);
++------------+--------+--------+
+| department | name   | salary |
++------------+--------+--------+
+| cse        | rutika |  50000 |
+| entc       | soni   |  86000 |
+| civil      | aishu  |  70000 |
+| mech       | avi    |  96000 |
+| electrical | sneha  |  14000 |
++------------+--------+--------+
+5 rows in set (0.00 sec)
+
+mysql> select department,salary,name, from empolyee where(department,salary)in(select department ,max(salary) from empolyee group by department);
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'from empolyee where(department,salary)in(select department ,max(salary) from emp' at line 1
+mysql> select department,salary,name from empolyee where(department,salary)in(select department,max(salary) from empolyee group by department);
++------------+--------+--------+
+| department | salary | name   |
++------------+--------+--------+
+| cse        |  50000 | rutika |
+| entc       |  86000 | soni   |
+| civil      |  70000 | aishu  |
+| mech       |  96000 | avi    |
+| electrical |  14000 | sneha  |
++------------+--------+--------+
+5 rows in set (0.00 sec)

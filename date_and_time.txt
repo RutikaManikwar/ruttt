@@ -1,0 +1,394 @@
+ERROR 1049 (42000): Unknown database 'empolyee'
+mysql> show tables;
++-------------------+
+| Tables_in_pratice |
++-------------------+
+| empolyee          |
+| info              |
+| student           |
++-------------------+
+3 rows in set (0.01 sec)
+
+mysql> select curdate();
++------------+
+| curdate()  |
++------------+
+| 2023-12-13 |
++------------+
+1 row in set (0.00 sec)
+
+mysql> select week("2023-12-13");
++--------------------+
+| week("2023-12-13") |
++--------------------+
+|                 50 |
++--------------------+
+1 row in set (0.00 sec)
+
+mysql> select year();
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near ')' at line 1
+mysql> select year("2023-12-13");
++--------------------+
+| year("2023-12-13") |
++--------------------+
+|               2023 |
++--------------------+
+1 row in set (0.00 sec)
+
+mysql> select month("2023-12-13");
++---------------------+
+| month("2023-12-13") |
++---------------------+
+|                  12 |
++---------------------+
+1 row in set (0.00 sec)
+
+mysql> select day("2023-12-13");
++-------------------+
+| day("2023-12-13") |
++-------------------+
+|                13 |
++-------------------+
+1 row in set (0.00 sec)
+
+mysql> select dayname("2023-12-13");
++-----------------------+
+| dayname("2023-12-13") |
++-----------------------+
+| Wednesday             |
++-----------------------+
+1 row in set (0.00 sec)
+
+mysql> select curtime();
++-----------+
+| curtime() |
++-----------+
+| 21:47:51  |
++-----------+
+1 row in set (0.00 sec)
+
+mysql> select datediff("2023-12-13","2003-06-25");
++-------------------------------------+
+| datediff("2023-12-13","2003-06-25") |
++-------------------------------------+
+|                                7476 |
++-------------------------------------+
+1 row in set (0.00 sec)
+
+mysql> select curtime();
++-----------+
+| curtime() |
++-----------+
+| 21:48:55  |
++-----------+
+1 row in set (0.00 sec)
+
+mysql> select curdate();
++------------+
+| curdate()  |
++------------+
+| 2023-12-13 |
++------------+
+1 row in set (0.00 sec)
+
+mysql> select dayname("2023-12-13");
++-----------------------+
+| dayname("2023-12-13") |
++-----------------------+
+| Wednesday             |
++-----------------------+
+1 row in set (0.00 sec)
+
+mysql> select week("2023-12-13");
++--------------------+
+| week("2023-12-13") |
++--------------------+
+|                 50 |
++--------------------+
+1 row in set (0.00 sec)
+
+mysql> select year("2023-12-13");
++--------------------+
+| year("2023-12-13") |
++--------------------+
+|               2023 |
++--------------------+
+1 row in set (0.00 sec)
+
+mysql> select month("2023-12-13");
++---------------------+
+| month("2023-12-13") |
++---------------------+
+|                  12 |
++---------------------+
+1 row in set (0.00 sec)
+
+mysql> select bin(234);
++----------+
+| bin(234) |
++----------+
+| 11101010 |
++----------+
+1 row in set (0.00 sec)
+
+mysql> select hex(345);
++----------+
+| hex(345) |
++----------+
+| 159      |
++----------+
+1 row in set (0.00 sec)
+
+mysql> select round(65.09);
++--------------+
+| round(65.09) |
++--------------+
+|           65 |
++--------------+
+1 row in set (0.00 sec)
+
+mysql> select power(4,6);
++------------+
+| power(4,6) |
++------------+
+|       4096 |
++------------+
+1 row in set (0.00 sec)
+
+mysql> select least(11,55,9,0,54,67);
++------------------------+
+| least(11,55,9,0,54,67) |
++------------------------+
+|                      0 |
++------------------------+
+1 row in set (0.00 sec)
+
+mysql> select greater(99,0,76);
+ERROR 1305 (42000): FUNCTION pratice.greater does not exist
+mysql> select greatest(99,0,76);
++-------------------+
+| greatest(99,0,76) |
++-------------------+
+|                99 |
++-------------------+
+1 row in set (0.00 sec)
+
+mysql> select sqrt(25);
++----------+
+| sqrt(25) |
++----------+
+|        5 |
++----------+
+1 row in set (0.00 sec)
+
+mysql> select 5 div(25);
++-----------+
+| 5 div(25) |
++-----------+
+|         0 |
++-----------+
+1 row in set (0.00 sec)
+
+mysql> select 25 div(5);
++-----------+
+| 25 div(5) |
++-----------+
+|         5 |
++-----------+
+1 row in set (0.00 sec)
+
+mysql> select rand();
++--------------------+
+| rand()             |
++--------------------+
+| 0.9893385944788704 |
++--------------------+
+1 row in set (0.00 sec)
+
+mysql> select mod(456,896)l;
++------+
+| l    |
++------+
+|  456 |
++------+
+1 row in set (0.00 sec)
+
+mysql> select mod(456,896);
++--------------+
+| mod(456,896) |
++--------------+
+|          456 |
++--------------+
+1 row in set (0.00 sec)
+
+mysql> select pie();
+ERROR 1305 (42000): FUNCTION pratice.pie does not exist
+mysql> select pi();
++----------+
+| pi()     |
++----------+
+| 3.141593 |
++----------+
+1 row in set (0.00 sec)
+
+mysql> select sqrt(4);
++---------+
+| sqrt(4) |
++---------+
+|       2 |
++---------+
+1 row in set (0.00 sec)
+
+mysql> select mod(44,66);
++------------+
+| mod(44,66) |
++------------+
+|         44 |
++------------+
+1 row in set (0.00 sec)
+
+mysql> select pi();
++----------+
+| pi()     |
++----------+
+| 3.141593 |
++----------+
+1 row in set (0.00 sec)
+
+mysql> select bin(44);
++---------+
+| bin(44) |
++---------+
+| 101100  |
++---------+
+1 row in set (0.00 sec)
+
+mysql> select hex(678);
++----------+
+| hex(678) |
++----------+
+| 2A6      |
++----------+
+1 row in set (0.00 sec)
+
+mysql> select rand();
++-------------------+
+| rand()            |
++-------------------+
+| 0.858241282271446 |
++-------------------+
+1 row in set (0.00 sec)
+
+mysql> select round(87.5667348908753);
++-------------------------+
+| round(87.5667348908753) |
++-------------------------+
+|                      88 |
++-------------------------+
+1 row in set (0.00 sec)
+
+mysql> select least(0,5,4);
++--------------+
+| least(0,5,4) |
++--------------+
+|            0 |
++--------------+
+1 row in set (0.00 sec)
+
+mysql> select greatest(0,88,99);
++-------------------+
+| greatest(0,88,99) |
++-------------------+
+|                99 |
++-------------------+
+1 row in set (0.00 sec)
+
+mysql> select 25 by(5);
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'by(5)' at line 1
+mysql> select 25 div(5);
++-----------+
+| 25 div(5) |
++-----------+
+|         5 |
++-----------+
+1 row in set (0.00 sec)
+
+mysql> select power(22,4);
++-------------+
+| power(22,4) |
++-------------+
+|      234256 |
++-------------+
+1 row in set (0.00 sec)
+
+mysql> select length("rutika");
++------------------+
+| length("rutika") |
++------------------+
+|                6 |
++------------------+
+1 row in set (0.00 sec)
+
+mysql> select substring(2,6);
++----------------+
+| substring(2,6) |
++----------------+
+|                |
++----------------+
+1 row in set (0.00 sec)
+
+mysql> select substring("rutika",2,6);
++-------------------------+
+| substring("rutika",2,6) |
++-------------------------+
+| utika                   |
++-------------------------+
+1 row in set (0.00 sec)
+
+mysql> select ltrim("                rutika");
++---------------------------------+
+| ltrim("                rutika") |
++---------------------------------+
+| rutika                          |
++---------------------------------+
+1 row in set (0.00 sec)
+
+mysql> select rtrim("rutika                 ");
++----------------------------------+
+| rtrim("rutika                 ") |
++----------------------------------+
+| rutika                           |
++----------------------------------+
+1 row in set (0.00 sec)
+
+mysql> select trim("            rutika                    ");
++------------------------------------------------+
+| trim("            rutika                    ") |
++------------------------------------------------+
+| rutika                                         |
++------------------------------------------------+
+1 row in set (0.00 sec)
+
+mysql> select concat("rutika","manikwar");
++-----------------------------+
+| concat("rutika","manikwar") |
++-----------------------------+
+| rutikamanikwar              |
++-----------------------------+
+1 row in set (0.00 sec)
+
+mysql> select("rutika");
++--------+
+| rutika |
++--------+
+| rutika |
++--------+
+1 row in set (0.00 sec)
+
+mysql> select upper("rutika");
++-----------------+
+| upper("rutika") |
++-----------------+
+| RUTIKA          |
++-----------------+
+1 row in set (0.01 sec)

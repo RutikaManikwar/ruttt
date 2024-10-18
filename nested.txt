@@ -1,0 +1,56 @@
+ql> SELECT *
+    -> FROM employee
+    -> WHERE salary > (SELECT AVG(salary) FROM employee);
+ERROR 1146 (42S02): Table 'pratice.employee' doesn't exist
+mysql> WHERE salary > (SELECT AVG(sal^Cy) FROM employee);
+mysql> select * from empolyee where salary>(select avg(salary) from empolyee);
++------+-------+------------+--------+------------+---------+-------+
+| roll | name  | department | salary | experience | address | email |
++------+-------+------------+--------+------------+---------+-------+
+|    1 | rutu  | cse        |  50000 |          5 | omerga  | NULL  |
+|    4 | soni  | entc       |  86000 |          9 | mumbai  | NULL  |
+|    6 | aishu | civil      |  70000 |          4 | goa     | NULL  |
+|    8 | avi   | mech       |  96000 |         12 | akluj   | NULL  |
++------+-------+------------+--------+------------+---------+-------+
+4 rows in set (0.00 sec)
+
+mysql> select * from empolyee where salary>(select min(salary) from empolyee);
++------+--------+------------+--------+------------+------------+-------+
+| roll | name   | department | salary | experience | address    | email |
++------+--------+------------+--------+------------+------------+-------+
+|    1 | rutu   | cse        |  50000 |          5 | omerga     | NULL  |
+|    3 | monika | entc       |  15000 |          8 | solapur    | NULL  |
+|    4 | soni   | entc       |  86000 |          9 | mumbai     | NULL  |
+|    5 | navu   | civil      |  20000 |          4 | pandharpur | NULL  |
+|    6 | aishu  | civil      |  70000 |          4 | goa        | NULL  |
+|    7 | sakshi | mech       |  16000 |          2 | aurangabad | NULL  |
+|    8 | avi    | mech       |  96000 |         12 | akluj      | NULL  |
++------+--------+------------+--------+------------+------------+-------+
+7 rows in set (0.00 sec)
+
+mysql> select name,roll,department from empolyee where salary>(select min(salary) from empolyee);
++--------+------+------------+
+| name   | roll | department |
++--------+------+------------+
+| rutu   |    1 | cse        |
+| monika |    3 | entc       |
+| soni   |    4 | entc       |
+| navu   |    5 | civil      |
+| aishu  |    6 | civil      |
+| sakshi |    7 | mech       |
+| avi    |    8 | mech       |
++--------+------+------------+
+7 rows in set (0.00 sec)
+
+mysql> SELECT *
+    -> FROM employee
+    -> WHERE job = (SELECT DISTINCT job FROM employee WHERE department = 'CSE');
+ERROR 1146 (42S02): Table 'pratice.employee' doesn't exist
+mysql> select * from empolyee where salary=(select department from empolyee where department="cse");
+Empty set (0.00 sec)
+
+mysql> select * from empolyee where salary=(select department from empolyee where department="entc");
+ERROR 1242 (21000): Subquery returns more than 1 row
+mysql> select * from empolyee where salary>(select department from empolyee where department="entc");
+ERROR 1242 (21000): Subquery returns more than 1 row
+mysql> select * from empolyee where salary>(select department from empolyee where department="entc");
